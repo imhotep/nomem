@@ -1,0 +1,24 @@
+<h1>New task</h1>
+
+<% form_for(@task) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :priority %><br />
+    <%= f.select(:priority_id, Priority.find(:all).collect { |p| [p.name, p.id] }) %>
+  </p>
+  <p>
+    <%= f.label :done? %><br />
+    <%= f.label :yes %><%= f.radio_button("done", "true") %>
+    <%= f.label :no %><%= f.radio_button("done", "false") %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', tasks_path %>

@@ -1,0 +1,20 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 3
+  title: "test notes 1" 
+  body: "Ruby On Rails rocks" 
+
+two:
+  user_id: 3
+  title: "test notes 2" 
+  body: "Ruby On Rails sucks" 
+
+three:
+  user_id: 3
+  title: "Tsuoshi parents seattle"
+  body: |  
+    tsuyoshi@yumegakanau.org
+    work: 206-382-0222
+    cell: 206-551-4344
+    parents: 425-643-0499

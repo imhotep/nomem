@@ -1,0 +1,29 @@
+<h1>Todo list</h1>
+<%= javascript_tag "var authenticity_token=#{form_authenticity_token.inspect};" if protect_against_forgery? %>
+<table>
+<% for task in @tasks %>
+  <tr>
+    <td><%= check_box_tag("task_#{task.id}", task.done?, task.done?, :onclick => remote_function(:url => {:action => :update_status, :id => task.id}, :with => "'done=' + $('task_#{task.id}').checked")) %> </td>
+    <td><%= content_tag :p, task.title, {:id => "task_title_#{task.id}"} %></td>
+    <td>
+      <%= priority_tag(task) %>
+      <%= priority_selector(task) %>
+    </td>
+    <td><%= link_to image_tag("page_white_edit.png"), task, {:title => "Edit Task"} %></td>
+    <td title="Delete task"><%= link_to image_tag("delete.png"), task, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+  <script type="text/javascript">
+    new Ajax.InPlaceEditor(<%= "'task_title_#{task.id}'" %>, <%= "'/tasks/update/#{task.id}'" %>, {okControl:false, cancelControl:false,
+    submitOnBlur: true, 
+    callback: function(form, value) { return 'authenticity_token='+ encodeURIComponent(authenticity_token)+'&task[title]=' + encodeURIComponent(value) }
+    });
+  </script>
+<% end %>
+</table>  
+
+
+
+<br />
+
+<%= link_to 'New task', new_task_path %><br />
+<%= link_to 'Back to main menu', '/' %>

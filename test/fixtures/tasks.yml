@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 3
+  title: "finish task and note application" 
+  done: false
+  priority_id: 2
+
+two:
+  user_id: 3
+  title: "finish draft on open source skills" 
+  done: true 
+  priority_id: 1

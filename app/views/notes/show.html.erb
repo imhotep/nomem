@@ -1,0 +1,15 @@
+<div>
+  <p>
+    <h2><%=h @note.title %></h2>
+  </p>
+  <%= javascript_tag "var authenticity_token=#{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  <p id="note"><%= @note.body.gsub(/\n/, '<br />') %></p>
+  <script type="text/javascript">
+    new Ajax.InPlaceEditor('note', '/notes/update/' + <%= @note.id %>, {rows:15,cols:40,
+    callback: function(form, value) { return 'authenticity_token='+ encodeURIComponent(authenticity_token)+'&note[body]=' + encodeURIComponent(value) }
+    });
+  </script>
+
+  <%= link_to 'Edit', edit_note_path(@note) %> |
+  <%= link_to 'Back', notes_path %>
+</div>

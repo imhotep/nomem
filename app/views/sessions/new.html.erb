@@ -1,0 +1,27 @@
+<h1>Welcome !</h1>
+<% if logged_in? %>
+    <p>This is a set of two applications meant to make your life simpler</p>
+    <h2><%= image_tag("note.png") %> Notes</h2>
+    <p>To take new notes click <a href="/notes">here</a></p>
+    <h2><%= image_tag("text_list_bullets.png") %> Tasks</h1>
+    <p>To create new tasks click <a href="/tasks">here</a></p><br />
+    <hr />
+    <p><a href='/logout'>Logout</a></p>
+<% else %>
+  <h2>Log In</h2>
+
+  <% form_tag session_path do -%>
+  <p><%= label_tag 'login' %><br />
+  <%= text_field_tag 'login', @login %></p>
+
+  <p><%= label_tag 'password' %><br/>
+  <%= password_field_tag 'password', nil %></p>
+
+  <!-- Uncomment this if you want this functionality
+  <p><%= label_tag 'remember_me', 'Remember me' %>
+  <%= check_box_tag 'remember_me', '1', @remember_me %></p>
+  -->
+
+  <p><%= submit_tag 'Log in' %></p>
+  <% end -%>
+<% end %>
