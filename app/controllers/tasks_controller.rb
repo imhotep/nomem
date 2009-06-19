@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
   def index
-    @tasks = Task.find(:all, :conditions => ["user_id = ?", current_user.id])
+    @tasks = Task.find(:all, :conditions => ["user_id = ?", current_user.id], :order => "priority_id DESC")
 
     respond_to do |format|
       format.html # index.html.erb
