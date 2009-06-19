@@ -16,10 +16,13 @@ class NotesController < ApplicationController
   # GET /notes/1.xml
   def show
     @note = Note.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @note }
+    if request.xhr?
+      render :text => @note.body
+    else
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @note }
+      end
     end
   end
 
@@ -60,12 +63,12 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
-    
+
     respond_to do |format|
       if @note.update_attributes(params[:note])
         format.html {
           if request.xml_http_request?
-            render :text => @note.body.gsub(/\n/, "<br />\n")
+            render :text => @note.body
           else
             flash[:notice] = 'Note was successfully updated.'
             redirect_to(@note)

@@ -6,12 +6,20 @@
 
 <% for note in @notes %>
   <tr>
-    <td><%= link_to note.title, note %></td>
+    <td><%= link_to_remote note.title, :url => {:action => "show", :id => note.id},
+                                                :method => :get,
+                                                :update => {:success => "note_content", :failure => "error"},
+                                                :success => "Modalbox.show($('note'), {title: \"#{note.title}\",overlayDuration:0 , slideDownDuration:0, slideUpDuration:0, resizeDuration:0});" %></td>
+    <td title="Edit note"><%= link_to image_tag("page_white_edit.png"), note, {:title => "Edit Task"} %></td>
     <td title="Delete Note"><%= link_to image_tag("delete.png"), note, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
-
+<div id="note" style="display:none;">
+  <pre id="note_content" />
+</div>
+<div id="error" style="display:none;">
+</div>
 <br />
 
 <%= link_to 'New note', new_note_path %><br />
