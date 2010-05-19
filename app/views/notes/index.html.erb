@@ -6,10 +6,16 @@
 
 <% for note in @notes %>
   <tr>
-    <td><%= link_to_remote note.title, :url => {:action => "show", :id => note.id},
+    <% if @mobile == true %>
+      <td><%= link_to note.title, {:controller => :notes, :action => :show, :id => note.id} %></td>
+    <% else %>
+      <td>
+        <%= link_to_remote note.title, :url => {:action => "show", :id => note.id},
                                                 :method => :get,
                                                 :update => {:success => "note_content", :failure => "error"},
-                                                :success => "Modalbox.show($('note'), {title: \"#{note.title}\",overlayDuration:0 , slideDownDuration:0, slideUpDuration:0, resizeDuration:0});" %></td>
+                                                :success => "Modalbox.show($('note'), {title: \"#{note.title}\",overlayDuration:0 , slideDownDuration:0, slideUpDuration:0, resizeDuration:0});" %>
+      </td>
+    <% end %>
     <td title="Edit note"><%= link_to image_tag("page_white_edit.png"), note, {:title => "Edit Task"} %></td>
     <td title="Delete Note"><%= link_to image_tag("delete.png"), note, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

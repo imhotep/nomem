@@ -5,7 +5,7 @@ class NotesController < ApplicationController
   # GET /notes.xml
   def index
     @notes = Note.find(:all, :conditions => ["user_id = ?", current_user.id])
-
+    @mobile = mobile_device?
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @notes }
