@@ -1,14 +1,22 @@
 class NotesController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required
+
   # GET /notes
   # GET /notes.xml
   def index
-    @notes = Note.find(:all, :conditions => ["user_id = ?", current_user.id])
+    @notes = Note.find(:all, :conditions => ["user_id = ?", params[:user_id]])
     @mobile = mobile_device?
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @notes }
+      format.json  { 
+        titles = {}
+        @notes.each do |note|
+          titles[note.id] = [note.title, note.body]
+        end
+        render :json => titles
+      }
     end
   end
 
@@ -75,9 +83,11 @@ class NotesController < ApplicationController
           end
         }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @note.errors, :status => :unprocessable_entity }
       end
     end
   end

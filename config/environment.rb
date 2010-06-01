@@ -55,7 +55,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_nomem_session',
+    :key => '_nomem_session',
     :secret      => '8a99c8e93a5aca81bda8ad46437a0e9e3e75a0ad85a174fc9ac1f63fca11dca2ef4d36420abed41dcfc9d612615377db62be49cf0b2f21e22b1b7c548970b0f6'
   }
 
@@ -73,3 +73,5 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
+
+API_KEY='uw078U51s9qyG86FMiYc6660n6yPmBvkj8t1tFJq0b8Aah4251ulTWuZ8oRT7os8q4U0K7kXpRbY5SfH2H5l2aP7klSDv3gX'
