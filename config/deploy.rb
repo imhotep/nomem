@@ -8,7 +8,7 @@ set :user, "nomem"
 set :scm_user, "nomem"
 set :scm_passphrase, "YaVdHy2L"
 set :use_sudo, false
-set :keep_releases, 5
+set :keep_releases, 2
 
 set :scm, :git
 set :branch, 'master'
