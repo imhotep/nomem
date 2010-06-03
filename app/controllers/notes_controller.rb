@@ -6,7 +6,7 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
   def index
-    user_id = eval(params[:user_id]) || current_user.id
+    user_id = params[:user_id] || current_user.id
     @notes = Note.find(:all, :conditions => ["user_id = ?", user_id])
     @mobile = mobile_device?
     respond_to do |format|
