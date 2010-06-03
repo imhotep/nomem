@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required
+  protect_from_forgery :except => :update
 
   # GET /notes
   # GET /notes.xml
