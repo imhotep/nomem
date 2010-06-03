@@ -18,7 +18,7 @@ set :deploy_to, "/var/www/nomem"
 set :deploy_via, :remote_cache
 
 set :env, "production"
-set(:app_server){ "97.107.130.23" }
+set(:app_server){ "nomem.koalabs.org" }
 
 role :app, app_server
 role :web, app_server
