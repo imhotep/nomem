@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required
-  protect_from_forgery :except => :update
+  protect_from_forgery :except => [:update, :create]
 
   # GET /notes
   # GET /notes.xml
@@ -56,15 +56,17 @@ class NotesController < ApplicationController
   # POST /notes.xml
   def create
     @note = Note.new(params[:note])
-    @note.user_id = current_user.id
+    @note.user_id = current_user.id unless current_user.nil?
     respond_to do |format|
       if @note.save
         flash[:notice] = 'Note was successfully created.'
         format.html { redirect_to(@note) }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
+        format.json  { render :json => @note, :status => :created, :location => @note }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @note.errors, :status => :unprocessable_entity }
       end
     end
   end
