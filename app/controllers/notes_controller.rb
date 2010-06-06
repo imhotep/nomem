@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   include AuthenticatedSystem
   before_filter :login_required
-  protect_from_forgery :except => [:update, :create]
+  protect_from_forgery :except => [:update, :create, :destroy]
 
   # GET /notes
   # GET /notes.xml
@@ -75,7 +75,6 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
-
     respond_to do |format|
       if @note.update_attributes(params[:note])
         format.html {
@@ -105,6 +104,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(notes_url) }
       format.xml  { head :ok }
+      format.json { head :ok }
     end
   end
 end
